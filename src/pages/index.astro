@@ -9,100 +9,119 @@ const posts = await db.select().from(Post).all();
 <Layout title="Welcome to Astro.">
   <main>
     <h1>whiteboard</h1>
-    <div>
+    <section>
       {
         posts.map((post) => (
-          <article>
+          <article class="post">
             <h2>{post.title}</h2>
             <p>{post.body}</p>
+            <p>{post.published.toLocaleDateString("en-US")}</p>
           </article>
         ))
       }
-    </div>
-
-    <ul role="list" class="link-card-grid">
-      <Card
-        href="https://docs.astro.build/"
-        title="Documentation"
-        body="Learn how Astro works and explore the official API docs."
-      />
-      <Card
-        href="https://astro.build/integrations/"
-        title="Integrations"
-        body="Supercharge your project with new frameworks and libraries."
-      />
-      <Card
-        href="https://astro.build/themes/"
-        title="Themes"
-        body="Explore a galaxy of community-built starter themes."
-      />
-      <Card
-        href="https://astro.build/chat/"
-        title="Community"
-        body="Come say hi to our amazing Discord community. ❤️"
-      />
-    </ul>
+    </section>
   </main>
 </Layout>
 
 <style>
+  /*
+  1. Use a more-intuitive box-sizing model.
+*/
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /*
+  2. Remove default margin
+*/
+  * {
+    margin: 0;
+  }
+
+  /*
+  3. Allow percentage-based heights in the application
+*/
+  html,
+  body {
+    height: 100%;
+  }
+
+  /*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+  6. Improve media defaults
+*/
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /*
+  7. Remove built-in form typography styles
+*/
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /*
+  8. Avoid text overflows
+*/
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  /*
+  9. Create a root stacking context
+*/
+  #root,
+  #__next {
+    isolation: isolate;
+  }
+
+  /* START OF CUSTOM STYLES */
+
   main {
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  article {
     padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
+    border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 0.3em 0.4em;
   }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
+
+  h2 {
+    font-size: 1.25rem;
+    margin: 0;
     padding: 0;
+  }
+
+  .post {
+    font-size: 1rem;
   }
 </style>
